@@ -1,3 +1,4 @@
+@bbc @news @markets
 Feature: BBC News Markets Section
 
   Scenario: Markets menu contains 4 stock exchange points

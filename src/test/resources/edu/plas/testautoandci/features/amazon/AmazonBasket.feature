@@ -1,3 +1,4 @@
+@amazon
 Feature: Amazon Basket
 
   Scenario: Amazon UK search and basket functionality

@@ -1,3 +1,4 @@
+@bbc @news @featuresAndAnalysis
 Feature: BBC News Features and Analysis Section
 
   Scenario: Features and Analysis menu contains 6 items

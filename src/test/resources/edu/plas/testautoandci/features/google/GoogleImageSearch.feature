@@ -1,3 +1,4 @@
+@google @imageSearch
 Feature: Google Image Search
 
   Scenario Outline: Image search

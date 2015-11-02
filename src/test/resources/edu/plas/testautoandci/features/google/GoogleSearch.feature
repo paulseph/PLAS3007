@@ -1,3 +1,4 @@
+@google @search
 Feature: Google Search
 
   Scenario: Google Search returns stats and results

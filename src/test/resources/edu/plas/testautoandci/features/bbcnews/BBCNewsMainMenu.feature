@@ -1,3 +1,4 @@
+@bbc @news @mainMenu
 Feature: BBC News Main Menu
 
   Scenario: Main menu items are visible

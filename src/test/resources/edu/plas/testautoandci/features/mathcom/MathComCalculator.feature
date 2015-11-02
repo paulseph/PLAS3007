@@ -1,3 +1,4 @@
+@mathcom @calculator
 Feature: Math.com online calculator
 
   Scenario Outline: Calculator

@@ -1,3 +1,4 @@
+@microsoft @paint
 Feature: Microsoft Paint
 
   Scenario: Colour picker functionality

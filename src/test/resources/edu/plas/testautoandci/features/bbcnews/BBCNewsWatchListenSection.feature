@@ -1,3 +1,4 @@
+@bbc @news @watchListen
 Feature: BBC News Watch Listen Section
 
   Scenario: Watch/Listen menu shows the World Service Radio link

@@ -1,3 +1,4 @@
+@google @calculator
 Feature: Google Calculator
 
   Scenario Outline: Google calculator through Search
