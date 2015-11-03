@@ -2,7 +2,7 @@
 Feature: Math.com online calculator
 
   Scenario Outline: Calculator
-    Given I navigate to 'http://www.math.com/students/calculators/source/basic.htm'
+    Given I navigate to http://www.math.com/students/calculators/source/basic.htm
     When I input '<num1><operator><num2>' in the calculator
     Then the calculated answer is '<answer>'
 

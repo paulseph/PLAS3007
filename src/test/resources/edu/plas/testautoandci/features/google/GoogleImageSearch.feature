@@ -2,7 +2,7 @@
 Feature: Google Image Search
 
   Scenario Outline: Image search
-    Given I navigate to Google Images
+    Given I navigate to https://www.google.com/imghp
     When I search for '<searchText>' on Google Images
     Then there are '<occurrences>' images that contain '<expectedSearchResult>'
 

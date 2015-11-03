@@ -2,6 +2,11 @@ package edu.plas.testautoandci.stepdefinitions;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import edu.plas.testautoandci.driver.Driver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class GoogleSteps {
     @When("^I search for '(.*)' on Google Search$")
@@ -34,6 +39,19 @@ public class GoogleSteps {
 
     @Then("the flag of '(.*)' is displayed$")
     public void theFlagOfCountryIsDisplayed(String country) {
+    }
+
+    @Then("the Google logo is displayed")
+    public void theGoogleLogoIsDisplayed() {
+        WebElement googleLogo = Driver.getWebDriver().findElement(By.id("hplogo"));
+        assertTrue(googleLogo.isDisplayed());
+    }
+
+    @Then("the I'm Feeling Lucky button is displayed")
+    public void theImFeelingLuckyButtonIsDisplayed() throws InterruptedException {
+        WebElement iMFeelingLuckyButton = Driver.getWebDriver().findElement(By.name("btnI"));
+        assertTrue(iMFeelingLuckyButton.isDisplayed());
+        assertEquals("I'm Feeling Lucky", iMFeelingLuckyButton.getAttribute("value"));
     }
 }
 

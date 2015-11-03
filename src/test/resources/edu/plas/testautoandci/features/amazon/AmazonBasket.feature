@@ -2,7 +2,7 @@
 Feature: Amazon Basket
 
   Scenario: Amazon UK search and basket functionality
-    Given I navigate to Amazon UK
+    Given I navigate to http://www.amazon.co.uk/
     When I search for 'book'
     Then a number of results are returned
     When I select the first result

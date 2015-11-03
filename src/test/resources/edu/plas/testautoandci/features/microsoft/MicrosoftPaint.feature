@@ -11,6 +11,6 @@ Feature: Microsoft Paint
     And I select the 'Mustard' colour
     And I draw a 'mustard seed'
     Then the 'mustard seed' appears on the canvas
-    Given I navigate to Google Images
+    Given I navigate to https://www.google.com/imghp
     When I search for 'mustard seed'
     Then my drawing of 'mustard seed' is similar to the first image on Google Images
