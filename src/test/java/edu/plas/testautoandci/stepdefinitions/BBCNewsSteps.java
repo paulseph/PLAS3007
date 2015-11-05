@@ -1,6 +1,5 @@
 package edu.plas.testautoandci.stepdefinitions;
 
-import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
@@ -20,8 +19,12 @@ public class BBCNewsSteps {
     }
 
 
+    @Then("^there are (\\d+) main menu items$")
+    public void theMainMenuIsVisibleWithTheFollowingItems(int numberOfMenuItems) {
+    }
+
     @Then("^the main menu is visible with the following items:$")
-    public void theMainMenuIsVisibleWithTheFollowingItems(DataTable arg1) {
+    public void theMainMenuIsVisibleWithTheFollowingItems(List<String> menuItems) {
     }
 
     @When("^I click on the menu item '(.*)'$")

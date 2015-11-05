@@ -1,6 +1,12 @@
 @bbc @news @mainMenu
 Feature: BBC News Main Menu
 
+    @numberOfItems
+    Scenario: Main menu items
+        Given I navigate to http://www.bbc.com/news
+        Then there are 17 main menu items
+
+
   Scenario: Main menu items are visible
     Given I navigate to http://www.bbc.com/news
     Then the main menu is visible with the following items:

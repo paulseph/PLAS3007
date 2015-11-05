@@ -41,8 +41,9 @@ public class Driver {
             } else {
                 throw new IllegalArgumentException("Browser system property is wrong! Cannot be " + BROWSER);
             }
-            driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+            driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            driver.manage().window().maximize();
         } catch (Exception e) {
             throw new RuntimeException("Failed to initialize Selenium WebDriver!", e);
         }
