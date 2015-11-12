@@ -1,7 +1,7 @@
 @bbc @news @markets
 Feature: BBC News Markets Section
 
-    @exchangePoints
+  @marketsExchangePoints @lecture5
   Scenario: Markets menu contains 4 stock exchange points
     Given I navigate to http://www.bbc.com/news
     Then the Markets menu contains 4 items
