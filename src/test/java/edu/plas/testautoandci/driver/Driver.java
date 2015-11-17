@@ -17,16 +17,21 @@ import java.util.concurrent.TimeUnit;
 public class Driver {
     private static WebDriver DRIVER = null;
     private static String BROWSER;
+    private static boolean IMAGES_CLEANED = false;
 
     @Before
     public void setup() {
         // Delete all screen shots from previous execution
-        File reportsDirectory = new File("reports/html-reports");
-        final File[] files = reportsDirectory.listFiles((dir, name) -> {
-            return name.matches(".*.jpeg");
-        });
-        for (final File file : files) {
-            file.delete();
+        // THIS SHOULD BE EXECUTED ONLY ONCE
+        if (!IMAGES_CLEANED) {
+            File reportsDirectory = new File("reports/html-reports");
+            final File[] files = reportsDirectory.listFiles((dir, name) -> {
+                return name.matches(".*.jpeg");
+            });
+            for (final File file : files) {
+                file.delete();
+            }
+            IMAGES_CLEANED = true;
         }
 
         BROWSER = System.getProperty("browser");
