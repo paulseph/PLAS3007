@@ -110,8 +110,8 @@ public class GoogleSteps {
 
     @Then("^a different text is shown in the I'm Feeling Lucky button$")
     public void aDifferentTextIsShownInTheIMFeelingLuckyButton() throws InterruptedException {
-        // Wait for 2 seconds so that button text changes
-        Thread.sleep(2000);
+        // Get the element with the CSS selector below - this shows that the button text changed
+        Driver.getWebDriver().findElement(By.cssSelector("[name='btnI'][style='visibility: hidden;']"));
 
         String[] iMFeelingLuckyButtonPossibleText = new String[] {"I'm Feeling Doodley", "I'm Feeling Artistic",
                 "I'm Feeling Hungry", "I'm Feeling Puzzled", "I'm Feeling Trendy", "I'm Feeling Stellar",
