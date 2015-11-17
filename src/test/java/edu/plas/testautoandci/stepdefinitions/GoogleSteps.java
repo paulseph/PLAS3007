@@ -117,7 +117,6 @@ public class GoogleSteps {
                 "I'm Feeling Hungry", "I'm Feeling Puzzled", "I'm Feeling Trendy", "I'm Feeling Stellar",
                 "I'm Feeling Playful", "I'm Feeling Wonderful", "I'm Feeling Generous", "I'm Feeling Curious"};
         String iMFeelingLuckyButtonText = Driver.getWebDriver().findElement(By.cssSelector("[name='btnI'] + div")).getAttribute("aria-label");
-        iMFeelingLuckyButtonText = "to fail";
         assertTrue("I'm Feeling Lucky random text is wrong! - " + iMFeelingLuckyButtonText,
                 Arrays.asList(iMFeelingLuckyButtonPossibleText).contains(iMFeelingLuckyButtonText));
     }

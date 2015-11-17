@@ -42,6 +42,7 @@ public class Driver {
 
     @After
     public void tearDown(Scenario scenario) {
+        // If Cucumber scenario fails, output time of failure and take screen shot
         if (scenario.isFailed()) {
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
             scenario.write("Time of failure: " + dateFormat.format(Calendar.getInstance().getTime()));
