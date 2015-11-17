@@ -1,6 +1,7 @@
 @mathcom @calculator
 Feature: Math.com online calculator
 
+  @lecture6
   Scenario Outline: Calculator
     Given I navigate to http://www.math.com/students/calculators/source/basic.htm
     When I input '<num1><operator><num2>' in the calculator

@@ -4,6 +4,7 @@ import cucumber.api.java.en.Then;
 import edu.plas.testautoandci.driver.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
 import static org.junit.Assert.assertEquals;
 
 public class TimesOfMaltaSteps {

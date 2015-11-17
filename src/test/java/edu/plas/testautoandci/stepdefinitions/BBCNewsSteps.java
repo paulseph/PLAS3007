@@ -43,11 +43,20 @@ public class BBCNewsSteps {
     }
 
     @When("^I click on the menu item '(.*)'$")
-    public void iClickOnTheMenuItem(String item) {
+    public void iClickOnTheMenuItem(String menu) {
+        WebElement menuItem = Driver.getWebDriver().findElement(By.xpath("//*[@class='navigation-wide-list']/li//span[text()='" + menu + "']"));
+        menuItem.click();
     }
 
     @Then("^the '(.*)' index is displayed$")
-    public void theMenuItemIndexIsDisplayed(String mainMenuItems) {
+    public void theMenuItemIndexIsDisplayed(String menuItem) {
+        if ("Video".equals(menuItem)) {
+            // Video index does not set the menu item as selected
+            assertTrue(Driver.getWebDriver().findElement(By.id("media-asset-page-video")).isDisplayed());
+        } else {
+            String selectedMenu = Driver.getWebDriver().findElement(By.cssSelector(".navigation-wide-list li.selected a")).getText();
+            assertEquals(menuItem, selectedMenu);
+        }
     }
 
     @Then("^the Markets menu contains (\\d+) items$")
@@ -83,6 +92,25 @@ public class BBCNewsSteps {
 
     @Then("^each item in the Markets menu contains the '(.*)'$")
     public void eachItemInTheMarketsMenuContainsThe(String marketMenuItem) {
+        List<WebElement> markets = Driver.getWebDriver().findElements(By.className("markets-index-promo__row"));
+
+        for (WebElement market: markets) {
+            switch (marketMenuItem) {
+                case "index":
+                    WebElement index = market.findElement(By.xpath("//td[not(@class)]"));
+                    assertTrue("Market index points should be displayed!", index.isDisplayed());
+                    break;
+                case "arrow":
+                    WebElement arrow = market.findElement(By.xpath("//td[@class='down' or @class='up']"));
+                    assertTrue("Market index arrow indicator should be displayed!", arrow.isDisplayed());
+                    break;
+                case "percentage":
+                    String percentage = market.findElement(By.xpath("//td[@class='down' or @class='up']")).getText();
+                    assertTrue("Market index should include the percentage up or down (%)!", percentage.contains("%"));
+                    break;
+                default:
+            }
+        }
     }
 
 

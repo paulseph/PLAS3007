@@ -1,9 +1,10 @@
 @amazon
 Feature: Amazon Basket
 
+  @lecture6
   Scenario: Amazon UK search and basket functionality
     Given I navigate to http://www.amazon.co.uk/
-    When I search for 'book'
+    When I search for 'catch 22'
     Then a number of results are returned
     When I select the first result
     And I add the current item to the Basket
