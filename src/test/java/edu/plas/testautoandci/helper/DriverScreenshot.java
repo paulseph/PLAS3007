@@ -11,6 +11,7 @@ import java.io.IOException;
 
 public class DriverScreenshot {
     public static void takeScreenshot(Scenario scenario) {
+        // Take screen shot
         File sourceImageFile = ((TakesScreenshot) Driver.getWebDriver()).getScreenshotAs(OutputType.FILE);
 
         if (sourceImageFile == null) {
@@ -21,6 +22,7 @@ public class DriverScreenshot {
         String imageName = System.currentTimeMillis() + ".jpeg";
         String screenShotPath = htmlReportsPath + imageName;
         try {
+            // Copy original image file created by Selenium WebDriver to the file specified
             FileUtils.copyFile(sourceImageFile, new File(screenShotPath));
         } catch (IOException e) {
             e.printStackTrace();
@@ -30,6 +32,7 @@ public class DriverScreenshot {
         // This handles screen shot paths when test is run on Jenkins
         String buildURL = System.getenv("BUILD_URL");
         if (buildURL != null) {
+            // Replaces the build number with ws/ in http://40.127.132.250:8080/job/TestJob/8/
             buildURL = buildURL.replaceAll("\\d+/$", "ws/");
             String absoluteImagePath = buildURL + screenShotPath;
             cucumberFailureScreenShotPath = absoluteImagePath.replace(" ", "%20");
