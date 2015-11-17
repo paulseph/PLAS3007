@@ -32,6 +32,7 @@ Feature: BBC News Main Menu
     | Home                 |
     | Video                |
     | World                |
+    | US & Canada          |
     | UK                   |
     | Business             |
     | Tech                 |
@@ -39,4 +40,3 @@ Feature: BBC News Main Menu
     | Magazine             |
     | Entertainment & Arts |
     | Health               |
-    | In Pictures          |
