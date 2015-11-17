@@ -17,9 +17,21 @@ public class DriverScreenshot {
             throw new RuntimeException("Source Image File cannot be null - screen shot not taken!");
         }
 
+
+
         String htmlReportsPath = "reports/html-reports/";
+
+        try {
+            new File(htmlReportsPath + "hello.txt").createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         String imageName = System.currentTimeMillis() + ".jpeg";
         String screenShotPath = htmlReportsPath + imageName;
+
+        System.out.println(screenShotPath);
+
         try {
             FileUtils.copyFile(sourceImageFile, new File(screenShotPath));
         } catch (IOException e) {
