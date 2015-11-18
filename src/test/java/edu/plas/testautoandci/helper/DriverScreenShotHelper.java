@@ -9,8 +9,8 @@ import org.openqa.selenium.TakesScreenshot;
 import java.io.File;
 import java.io.IOException;
 
-public class DriverScreenshot {
-    public static void takeScreenshot(Scenario scenario) {
+public class DriverScreenShotHelper {
+    public static void takeScreenShot(Scenario scenario) {
         // Take screen shot
         File sourceImageFile = ((TakesScreenshot) Driver.getWebDriver()).getScreenshotAs(OutputType.FILE);
 
