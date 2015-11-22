@@ -56,7 +56,7 @@ public class DriverWindowHelper {
     }
 
     // Switches focus back to the main browser window
-    public void switchToMainWindow() {
+    public static void switchToMainWindow() {
         Driver.getWebDriver().switchTo().window(mainWindowHandle);
     }
 }
