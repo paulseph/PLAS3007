@@ -24,6 +24,10 @@ public class Driver {
     private static WebDriver driver = null;
     private static String browser;
     private static boolean imagesCleaned = false;
+    private static final String SELENIUM_GRID_HUB_URL = "http://40.127.132.250:4444/wd/hub";
+    private static final String CHROME_DRIVER_MAC_PATH = "browserdriver/chrome/chromedriver";
+    private static final String CHROME_DRIVER_WINDOWS_PATH = "browserdriver/chrome/chromedriver.exe";
+    private static final String IE_DRIVER_WINDOWS_PATH = "browserdriver/ie/IEDriverServer.exe";
 
     @Before
     public void setup() {
@@ -68,47 +72,58 @@ public class Driver {
 
     private void startWebDriver() {
         try {
-            if (browser.equals("localFirefox")) {
-                FirefoxProfile firefoxProfile = new FirefoxProfile();
-                firefoxProfile.setEnableNativeEvents(false);
-                driver = new FirefoxDriver(firefoxProfile);
-            } else if (browser.equals("localChrome")) {
-                if (System.getProperty("os.name").contains("Mac")) {
-                    System.setProperty("webdriver.chrome.driver", "browserdriver/chrome/chromedriver");
-                } else if (System.getProperty("os.name").contains("Windows")) {
-                    System.setProperty("webdriver.chrome.driver", "browserdriver/chrome/chromedriver.exe");
-                }
-                driver = new ChromeDriver();
-            } else if (browser.equals("localIE")) {
-                System.setProperty("webdriver.ie.driver", "browserdriver/ie/IEDriverServer.exe");
-                DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
-                driver = new InternetExplorerDriver(ieCapabilities);
+            switch (browser) {
+                case "localFirefox":
+                    FirefoxProfile firefoxProfile = new FirefoxProfile();
+                    firefoxProfile.setEnableNativeEvents(false);
+                    driver = new FirefoxDriver(firefoxProfile);
+                    break;
 
-            } else if (browser.equals("gridFirefox")) {
-                DesiredCapabilities capability = DesiredCapabilities.firefox();
-                capability.setBrowserName("firefox");
-                capability.setVersion("41.0.1");
-                capability.setPlatform(Platform.WINDOWS);
-                FirefoxProfile firefoxProfile = new FirefoxProfile();
-                firefoxProfile.setEnableNativeEvents(false);
-                capability.setCapability(FirefoxDriver.PROFILE, firefoxProfile);
-                driver = new RemoteWebDriver(new URL("http://40.127.132.250:4444/wd/hub"), capability);
+                case "localChrome":
+                    if (System.getProperty("os.name").contains("Mac")) {
+                        System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_MAC_PATH);
+                    } else if (System.getProperty("os.name").contains("Windows")) {
+                        System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_WINDOWS_PATH);
+                    }
+                    driver = new ChromeDriver();
+                    break;
 
-            } else if (browser.equals("gridChrome")) {
-                DesiredCapabilities capability = DesiredCapabilities.chrome();
-                capability.setBrowserName("chrome");
-                capability.setPlatform(Platform.WINDOWS);
-                new RemoteWebDriver(new URL("http://40.127.132.250:4444/wd/hub"), capability);
+                case "localIE":
+                    System.setProperty("webdriver.ie.driver", IE_DRIVER_WINDOWS_PATH);
+                    DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
+                    driver = new InternetExplorerDriver(ieCapabilities);
+                    break;
 
-            } else if (browser.equals("gridIE")) {
-                DesiredCapabilities capability = DesiredCapabilities.internetExplorer();
-                capability.setBrowserName("iexplore");
-                capability.setVersion("11");
-                capability.setPlatform(Platform.WINDOWS);
-                new RemoteWebDriver(new URL("http://40.127.132.250:4444/wd/hub"), capability);
-            } else {
-                throw new IllegalArgumentException("Browser system property is wrong! Cannot be " + browser);
+                case "gridFirefox":
+                    FirefoxProfile firefoxProfileGrid = new FirefoxProfile();
+                    firefoxProfileGrid.setEnableNativeEvents(false);
+                    DesiredCapabilities firefoxCapability = DesiredCapabilities.firefox();
+                    firefoxCapability.setBrowserName("firefox");
+                    firefoxCapability.setVersion("41.0.1");
+                    firefoxCapability.setPlatform(Platform.WINDOWS);
+                    firefoxCapability.setCapability(FirefoxDriver.PROFILE, firefoxProfileGrid);
+                    driver = new RemoteWebDriver(new URL(SELENIUM_GRID_HUB_URL), firefoxCapability);
+                    break;
+
+                case "gridChrome":
+                    DesiredCapabilities chromeCapability = DesiredCapabilities.chrome();
+                    chromeCapability.setBrowserName("chrome");
+                    chromeCapability.setPlatform(Platform.WINDOWS);
+                    driver = new RemoteWebDriver(new URL(SELENIUM_GRID_HUB_URL), chromeCapability);
+                    break;
+
+                case "gridIE":
+                    DesiredCapabilities ieCapability = DesiredCapabilities.internetExplorer();
+                    ieCapability.setBrowserName("internet explorer");
+                    ieCapability.setVersion("11");
+                    ieCapability.setPlatform(Platform.WINDOWS);
+                    driver = new RemoteWebDriver(new URL(SELENIUM_GRID_HUB_URL), ieCapability);
+                    break;
+
+                default:
+                    throw new IllegalArgumentException("Browser system property is wrong! Cannot be " + browser);
             }
+
             driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             driver.manage().window().maximize();
