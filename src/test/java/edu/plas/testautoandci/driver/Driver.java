@@ -90,8 +90,7 @@ public class Driver {
 
                 case "localIE":
                     System.setProperty("webdriver.ie.driver", IE_DRIVER_WINDOWS_PATH);
-                    DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
-                    driver = new InternetExplorerDriver(ieCapabilities);
+                    driver = new InternetExplorerDriver();
                     break;
 
                 case "gridFirefox":
