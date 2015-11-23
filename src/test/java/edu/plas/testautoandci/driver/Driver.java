@@ -82,7 +82,6 @@ public class Driver {
             } else if (browser.equals("localIE")) {
                 System.setProperty("webdriver.ie.driver", "browserdriver/ie/IEDriverServer.exe");
                 DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
-                ieCapabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
                 driver = new InternetExplorerDriver(ieCapabilities);
 
             } else if (browser.equals("gridFirefox")) {

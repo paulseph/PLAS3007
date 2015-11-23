@@ -6,8 +6,6 @@ import edu.plas.testautoandci.driver.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,15 +16,7 @@ import static org.junit.Assert.assertTrue;
 public class GoogleSteps {
     @When("^I search for '(.*)' on Google Search$")
     public void iSearchForSearchText(String searchText) {
-        WebDriverWait wait = new WebDriverWait(Driver.getWebDriver(), 10);
-        WebElement element = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.id("lst-ib"))
-        );
-
-        element.sendKeys(searchText);
-
-
-        //Driver.getWebDriver().findElement(By.id("lst-ib")).sendKeys(searchText);
+        Driver.getWebDriver().findElement(By.id("lst-ib")).sendKeys(searchText);
         Driver.getWebDriver().findElement(By.name("btnG")).click();
     }
 
