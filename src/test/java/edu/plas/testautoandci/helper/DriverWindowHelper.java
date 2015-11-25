@@ -9,6 +9,10 @@ import java.util.Set;
 public class DriverWindowHelper {
     private static String mainWindowHandle;
 
+    public static String getWindowTitle() {
+        return Driver.getWebDriver().getTitle();
+    }
+
     // Switches focus to the next available window that is not the main window
     public static void switchToWindow() {
         WebDriver driver = Driver.getWebDriver();
