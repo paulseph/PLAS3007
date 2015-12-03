@@ -1,9 +1,5 @@
 package edu.plas.testautoandci.driver;
 
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
-import edu.plas.testautoandci.helper.DriverScreenShotHelper;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,40 +9,18 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.io.File;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 public class Driver {
     private static WebDriver driver = null;
     private static String browser;
-    private static boolean imagesCleaned = false;
     private static final String SELENIUM_GRID_HUB_URL = "http://40.127.132.250:4444/wd/hub";
     private static final String CHROME_DRIVER_MAC_PATH = "browserdriver/chrome/chromedriver";
     private static final String CHROME_DRIVER_WINDOWS_PATH = "browserdriver/chrome/chromedriver.exe";
     private static final String IE_DRIVER_WINDOWS_PATH = "browserdriver/ie/IEDriverServer.exe";
 
-    @Before
-    public void setup() {
-        // Delete all screen shots from previous execution
-        // THIS SHOULD BE EXECUTED ONLY ONCE
-        if (!imagesCleaned) {
-            File reportsDirectory = new File("reports/html-reports");
-            final File[] files = reportsDirectory.listFiles((dir, name) -> {
-                return name.matches(".*.jpeg");
-            });
-            for (final File file : files) {
-                file.delete();
-            }
-            imagesCleaned = true;
-        }
-
-        browser = System.getProperty("browser");
-        startWebDriver();
-    }
+    private Driver() {}
 
     public static WebDriver getWebDriver() {
         if (driver == null) {
@@ -55,22 +29,11 @@ public class Driver {
         return driver;
     }
 
-    @After
-    public void tearDown(Scenario scenario) {
-        // If Cucumber scenario fails, output time of failure and take screen shot
-        if (scenario.isFailed()) {
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-            scenario.write("Time of failure: " + dateFormat.format(Calendar.getInstance().getTime()));
-            DriverScreenShotHelper.takeScreenShot(scenario);
-        }
-
+    public static void startWebDriver() {
+        // Check whether driver has already been initialised
         if (driver != null) {
-            driver.quit();
-            driver = null;
+            throw new IllegalStateException("Selenium WebDriver has already been initialised!");
         }
-    }
-
-    private void startWebDriver() {
         try {
             switch (browser) {
                 case "localFirefox":
@@ -133,5 +96,13 @@ public class Driver {
 
     public static String getBrowser() {
         return browser;
+    }
+
+    public static void setBrowser(String browser) {
+        Driver.browser = browser;
+    }
+
+    public static void nullWebDriver() {
+        driver = null;
     }
 }
