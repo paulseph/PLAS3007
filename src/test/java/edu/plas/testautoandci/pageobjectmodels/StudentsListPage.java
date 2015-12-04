@@ -70,4 +70,8 @@ public class StudentsListPage {
 
         return allMobileNumbers;
     }
+
+    public void deleteAllStudents() {
+        driver.findElement(By.cssSelector("#delete_all a")).click();
+    }
 }
