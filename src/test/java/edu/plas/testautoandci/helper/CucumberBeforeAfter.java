@@ -4,9 +4,11 @@ import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import edu.plas.testautoandci.driver.Driver;
+import edu.plas.testautoandci.driver.SikuliDriver;
 import edu.plas.testautoandci.pageobjectmodels.StudentsCreationPage;
 import edu.plas.testautoandci.pageobjectmodels.StudentsHomePage;
 import edu.plas.testautoandci.pageobjectmodels.StudentsListPage;
+import org.sikuli.script.App;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,7 +23,7 @@ public class CucumberBeforeAfter {
     private static boolean studentPopulationExecuted = false;
 
     // This ensures that this @Before is always executed first
-    @Before(order = 0)
+    @Before(order = 0, value = "~@sikuli")
     public void setup() {
         // Delete all screen shots from previous execution
         // THIS SHOULD BE EXECUTED ONLY ONCE
@@ -41,7 +43,7 @@ public class CucumberBeforeAfter {
     }
 
     // This ensures that this @After is always executed last
-    @After(order = 0)
+    @After(order = 0, value = "~@sikuli")
     public void tearDown(Scenario scenario) {
         // If Cucumber scenario fails, output time of failure and take screen shot
         if (scenario.isFailed()) {
@@ -54,6 +56,11 @@ public class CucumberBeforeAfter {
             Driver.getWebDriver().quit();
             Driver.nullWebDriver();
         }
+    }
+
+    @After(value = "@sikuli")
+    public void tearDownSikuli() {
+        App.close("Firefox");
     }
 
     @Before(value="@students")
