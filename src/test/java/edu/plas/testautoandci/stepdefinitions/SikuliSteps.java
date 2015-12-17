@@ -57,5 +57,10 @@ public class SikuliSteps {
             default:
                 throw new IllegalArgumentException("Section handling not found!");
         }
+
+        // double matchScore = sikuliDriver.exists("abc.png", 10).getScore();
+        // this delta means that match should be at least 80%
+        // double delta = 0.2;
+        // assertEquals(1.0, matchScore, delta);
     }
 }
