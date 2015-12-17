@@ -55,7 +55,6 @@ public class SikuliSteps {
                 assertTrue(sikuliDriver.find(SikuliDriver.SIKULI_IMAGES_PATH + "complete_guide.png").text().contains(expectedText));
                 break;
             default:
-                System.out.println("In Default");
                 throw new IllegalArgumentException("Section handling not found!");
         }
     }
