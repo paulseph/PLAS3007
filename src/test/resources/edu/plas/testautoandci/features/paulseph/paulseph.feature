@@ -2,5 +2,5 @@
 Feature: Paulseph Test
 
   Scenario: Dummy
-    Given I navigate to http://www.cnn.com
+    Given I test
     Then I get result
